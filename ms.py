@@ -1,7 +1,9 @@
+import time
 import pydirectinput as pyp
 import keyboard
 import pyautogui as gui
 import threading
+import mouse
 
 incrementvar = 20
 
@@ -16,20 +18,21 @@ class Rightside(threading.Thread):
                 xaxis = pos[0] + incrementvar
                 yaxis = pos[1]
                 print(xaxis, yaxis)
-                pyp.moveTo(x=xaxis, y=yaxis)
+                mouse.move(xaxis, yaxis, absolute=True, duration=0.01)
+                #pyp.move(x=xaxis, y=yaxis)
 
 
 class Downside(threading.Thread):
     def run(self):
         while True:
-            if keyboard.is_pressed('2'):
+            if keyboard.is_pressed('5'):
                 pos2 = gui.position()
                 pos = pos2
                 print(pos)
                 yaxis = pos[1] + incrementvar
                 xaxis = pos[0]
                 print(xaxis, yaxis)
-                pyp.moveTo(x=xaxis, y=yaxis)
+                mouse.move(x=xaxis, y=yaxis, absolute=True, duration=0.01)
 
 
 class Leftside(threading.Thread):
@@ -42,7 +45,7 @@ class Leftside(threading.Thread):
                 xaxis = pos[0] - incrementvar
                 yaxis = pos[1]
                 print(xaxis, yaxis)
-                pyp.moveTo(x=xaxis, y=yaxis)
+                mouse.move(x=xaxis, y=yaxis, absolute=True, duration=0.01)
 
 
 class Upside(threading.Thread):
@@ -55,19 +58,20 @@ class Upside(threading.Thread):
                 yaxis = pos[1] - incrementvar
                 xaxis = pos[0]
                 print(xaxis, yaxis)
-                pyp.moveTo(x=xaxis, y=yaxis)
+                mouse.move(x=xaxis, y=yaxis, absolute=True, duration=0.01)
 
 
 class click(threading.Thread):
-    def run(selfs):
-        while True:
-            if keyboard.is_pressed('5'):
-                pyp.leftClick()
-
-class rclick(threading.Thread):
-    def run(selfs):
+    def run(self):
         while True:
             if keyboard.is_pressed('0'):
+                pyp.leftClick()
+
+
+class rclick(threading.Thread):
+    def run(self):
+        while True:
+            if keyboard.is_pressed('.'):
                 pyp.rightClick()
 
 
